@@ -1,0 +1,121 @@
+﻿@model IEnumerable<GerenciadorAnimes.Model.Animes>
+
+@{
+    int indice = 0;
+}
+
+<style type="text/css">
+    .col-md-12 {
+        padding-left: 0px;
+        padding-right: 0px;
+        border: 1px 0px 0px 0px solid #CACACA
+    }
+
+    .tableAnime {
+        border-radius: 4px;
+    }
+
+    th {
+        font-family: 'Book Antiqua';
+        font-size: 14px;
+        background: #FFF;
+    }
+
+    table.dataTable.no-footer {
+        border-bottom: 1px solid #CACACA !important;
+    }
+</style>
+
+<link rel="stylesheet" href="~/Content/Site.css" />
+
+<div class="col-md-12">
+    <button class="btn btn-success adicionarAnime" style="margin-bottom: 10px; float: right"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> <span>Adicionar</span></button>
+    <table class="col-md-12 table table-bordered tableAnime">
+        <thead>
+            <tr>
+                <th scope="col" style="padding: 15px">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Genêro</th>
+                <th scope="col" style="text-align: center">Visto</th>
+                <th scope="col">Recomendável</th>
+                <th scope="col" style="text-align: center">Nota</th>
+                <th scope="col">Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var anime in Model)
+            {
+                indice++;
+                <tr>
+
+                    <th>@indice</th>
+                    <td nowrap>@anime.Nome</td>
+                    <td>@anime.Genero</td>
+                    <td nowrap style="text-align: center"><i class="@(anime.Visualizado == true ? "glyphicon glyphicon-ok" : "glyphicon glyphicon-remove")" aria-hidden="true" style="color:@(anime.Visualizado == true ? "#32CD32" : "#F00")"></i></td>
+                    <td nowrap>@(anime.Recomendavel == false && anime.Visualizado == false ? "Não visualizado" : anime.Recomendavel == false && anime.Visualizado == true ? "Não recomendado" : "Recomendado" )</td>
+                    <td nowrap style="text-align: center">@anime.Nota</td>
+                    <td nowrap><button class="editarAnime" style="background: none; border: none" data-id="@anime.ID"><i class="glyphicon glyphicon-pencil" aria-hidden="true" style="color: #0026ff"></i></button></td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="modal fade" id="modalAdicionarAnime" role="dialog" data-url="@Url.Action("ModalAdicionarAnime", "Anime")"></div>
+    <div class="modal fade" id="modalEditarAnime" role="dialog" data-url="@Url.Action("ModalEditarAnime", "Anime")"></div>
+</div>
+@* Load datatable css *@
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+@* Load datatable js *@
+@section Scripts{
+    <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.tableAnime').DataTable({
+                "language": {
+                    "sEmptyTable": "Nenhum registro encontrado",
+                    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                    "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sInfoThousands": ".",
+                    "sLengthMenu": "Mostrar _MENU_ resultados por página",
+                    "sLoadingRecords": "Carregando...",
+                    "sProcessing": "Processando...",
+                    "sZeroRecords": "Nenhum registro encontrado",
+                    "sSearch": "Pesquisar",
+                    "oPaginate": {
+                        "sNext": "Próximo",
+                        "sPrevious": "Anterior",
+                        "sFirst": "Primeiro",
+                        "sLast": "Último"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Ordenar colunas de forma ascendente",
+                        "sSortDescending": ": Ordenar colunas de forma descendente"
+                    }
+                }
+            });
+
+            $('select[name="DataTables_Table_0_length"]').css({ "padding": "5px", "border-radius": "4px", "font-weight": "normal" });
+            $('input[aria-controls="DataTables_Table_0"]').css({ "border": "1px solid #CACACA", "border-radius": "4px", "font-weight": "normal" });
+
+            $(document).on('click', '.adicionarAnime', function (e) {
+                var url = $("#modalAdicionarAnime").data("url");
+                $.get(url, function (data) {
+                    $("#modalAdicionarAnime").html(data);
+                    $("#modalAdicionarAnime").modal("show");
+                });
+            });
+
+            $(document).on('click', '.editarAnime', function (e) {
+                var url = $("#modalEditarAnime").data("url");
+                var id = $(this).data('id');
+                $.get(url + '/' + id, function (data) {
+                    $("#modalEditarAnime").html(data);
+                    $("#modalEditarAnime").modal("show");
+                });
+
+            });
+        });
+    </script>
+}

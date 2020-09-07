@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Animes</title>
+    <link rel="stylesheet" href="~/Content/Site.css" />
+
+    @*<script src="~/Content/jquery.min.js"></script>*@
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body style="background: #e7f4ff">
+    <header>
+        <div class="nav">
+            <div class="container">
+                <div class="navbar-header">
+                    <img src="~/Content/Imagens/icon.jpg" class="img_nav" />
+                    <h2>Gerenciador de Animes</h2>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container conteudo_body">
+        @RenderBody()
+    </div>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - João Milanez</p>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

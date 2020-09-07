@@ -1,0 +1,50 @@
+﻿* {
+    margin: 0;
+
+}
+
+.nav {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background: #00BFFF;
+}
+
+.navbar-header {
+    background: #00BBFF;
+    width: 100%;
+    padding: 10px;
+}
+
+    .navbar-header .img_nav {
+        width: 100px;
+        float: left;
+        margin-right: 10px;
+    }
+
+    .navbar-header h2 {
+        margin-top: 30px;
+        font-family: 'Berlin Sans FB';
+        font-size: 50px;
+        text-align: center;
+        margin-right: 130px
+    }
+
+.conteudo_body {
+    margin-top: 140px;
+    height: 100%;
+}
+
+footer {
+    width: 100%;
+    background: #0000CD;
+    padding: 20px;
+    clear: both;
+    position: absolute;
+    bottom: -120px;
+}
+
+    footer p {
+        color: #FFF;
+        margin-top: 5px;
+    }
