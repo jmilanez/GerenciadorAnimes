@@ -1,6 +1,5 @@
 ﻿* {
     margin: 0;
-
 }
 
 .nav {
@@ -33,6 +32,13 @@
 .conteudo_body {
     margin-top: 140px;
     height: 100%;
+}
+
+.animesVistosMomento {
+    margin-top: 30px;
+    font-family: Arial;
+    font-size: 11px;
+    font-weight: normal;
 }
 
 footer {

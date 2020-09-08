@@ -47,7 +47,6 @@
             {
                 indice++;
                 <tr>
-
                     <th>@indice</th>
                     <td nowrap>@anime.Nome</td>
                     <td>@anime.Genero</td>
@@ -55,10 +54,10 @@
                     <td nowrap>@(anime.Recomendavel == false && anime.Visualizado == false ? "Não visualizado" : anime.Recomendavel == false && anime.Visualizado == true ? "Não recomendado" : "Recomendado" )</td>
                     <td nowrap style="text-align: center">@anime.Nota</td>
                     <td nowrap><button class="editarAnime" style="background: none; border: none" data-id="@anime.ID"><i class="glyphicon glyphicon-pencil" aria-hidden="true" style="color: #0026ff"></i></button></td>
-
                 </tr>
             }
         </tbody>
+        <label class="animesVistosMomento">Até o momento foram vistos <b>@Model.Where(w => w.Visualizado == true).Count()</b> animes de <b>@Model.Count()</b></label>
     </table>
     <div class="modal fade" id="modalAdicionarAnime" role="dialog" data-url="@Url.Action("ModalAdicionarAnime", "Anime")"></div>
     <div class="modal fade" id="modalEditarAnime" role="dialog" data-url="@Url.Action("ModalEditarAnime", "Anime")"></div>
